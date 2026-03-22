@@ -32,3 +32,93 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+.loader {
+  font-size: 48px;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+}
+.loader:after {
+  content: '';
+  height: 4px;
+  width: 0%;
+  display: block;
+  background: #ff3d00;
+  animation: 5s lineGrow linear infinite;
+}
+
+@keyframes lineGrow {
+  to {
+    width: 100%;
+  }
+}
+
+.loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.btn-load.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.item {
+  width: 360px;
+  height: 200px;
+}
+
+.img-photo {
+  width: 360px;
+  height: 200px;
+  display: block;
+}
+
+img {
+  width: 360px;
+  height: 200px;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: row;
+  column-gap: 24px;
+  row-gap: 24px;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.btn-load {
+  display: flex;
+  justify-content: center;
+  width: 93px;
+  height: 24px;
+
+  margin-top: 50px;
+}
+
+.wrap-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
