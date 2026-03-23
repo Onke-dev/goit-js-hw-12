@@ -3,21 +3,28 @@ import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const galleryItems = document.querySelector('.gallery');
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionDelay: 250,
+  captionsData: 'alt',
+});
+
+const galleryList = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 const btnLoad = document.querySelector('.btn-load');
 
-export function createGallery(image) {
-  const {
-    webformatURL,
-    largeImageURL,
-    tags,
-    likes,
-    views,
-    comments,
-    downloads,
-  } = image;
-  return `<li class="item">
+export function createGallery(images, append = false) {
+  const markup = images
+    .map(image => {
+      const {
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      } = image;
+      return `<li class="item">
         <a class="img-photo" href="${largeImageURL}"><img src="${webformatURL}" alt="${tags}"></a>
         <div class="wrap-info">
             <p class="info">Likes ${likes}</p>
@@ -26,21 +33,18 @@ export function createGallery(image) {
             <p class="info">Downloads ${downloads}</p>
         </div>
       </li>`;
-}
-export function createGallerys(images) {
-  return images.map(createGallery).join('');
-}
-
-export function lightBox() {
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionDelay: 250,
-    captionsData: 'alt',
-  });
+    })
+    .join('');
+  if (append) {
+    galleryList.insertAdjacentHTML('beforeend', markup);
+  } else {
+    galleryList.innerHTML = markup;
+  }
   lightbox.refresh();
 }
 
 export function clearGallery() {
-  galleryItems.innerHTML = '';
+  galleryList.innerHTML = '';
 }
 
 export function showLoader() {

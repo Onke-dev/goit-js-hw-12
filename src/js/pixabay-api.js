@@ -16,10 +16,11 @@ export async function getImagesByQuery(query, page) {
     safesearch: true,
   };
 
-  return await axios
-    .get(url, { params })
-    .then(res => res.data)
-    .catch(error => {
-      console.log(error);
-    });
+  try {
+    const response = await axios.get(url, { params });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
